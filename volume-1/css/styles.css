@@ -1,0 +1,399 @@
+/* ===========================================================
+   《阿拉伯语在你手中》第一册 · 共享样式
+   主题：翡翠绿 + 金色，适配 RTL 阿拉伯语 + 中文对照
+   =========================================================== */
+
+:root {
+  --ab-green:        #15603A;
+  --ab-green-light:  #1E7A4C;
+  --ab-green-pale:   #E4F0E8;
+  --ab-gold:         #C9A227;
+  --ab-gold-light:   #E3C766;
+  --ab-cream:        #FBF7EE;
+  --ab-cream-2:      #F4ECDB;
+  --ab-ink:          #25332A;
+  --ab-ink-soft:     #4A5A4F;
+  --ab-red:          #B23A2E;
+  --ab-blue:         #1A5276;
+  --ab-shadow:       0 6px 18px rgba(21, 96, 58, .12);
+  --ab-radius:       14px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  color: var(--ab-ink);
+  background: var(--ab-cream);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+a { color: var(--ab-green); text-decoration: none; }
+a:hover { color: var(--ab-green-light); }
+
+/* ---------- 滚动进度条 ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 4px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--ab-gold), var(--ab-green-light));
+  z-index: 999;
+  transition: width .1s linear;
+}
+
+/* ---------- 顶部导航 ---------- */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background: rgba(251, 247, 238, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(21, 96, 58, .12);
+  transition: background .3s, box-shadow .3s;
+}
+.top-nav.scrolled {
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(21, 96, 58, .10);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ab-green);
+  white-space: nowrap;
+}
+.nav-logo .ar-logo {
+  font-family: "Geeza Pro", "Scheherazade New", "Traditional Arabic", "Segoe UI", serif;
+  font-size: 22px;
+  color: var(--ab-gold);
+  direction: rtl;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.nav-links a {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--ab-ink-soft);
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: var(--ab-green-pale); color: var(--ab-green); }
+.nav-links a.active { background: var(--ab-green); color: #fff; }
+
+.nav-toggle {
+  display: none;
+  background: var(--ab-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ---------- Hero ---------- */
+.hero,
+.unit-hero {
+  background: linear-gradient(135deg, var(--ab-green) 0%, #0E4630 100%);
+  color: #fff;
+  padding: 56px 28px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.unit-hero { padding: 44px 28px 38px; }
+.hero::after,
+.unit-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(201,162,39,.18), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(201,162,39,.14), transparent 42%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(201,162,39,.22);
+  border: 1px solid var(--ab-gold-light);
+  color: var(--ab-gold-light);
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.unit-hero h1 { font-size: 28px; }
+.hero .ar-title {
+  font-family: "Geeza Pro", "Scheherazade New", "Traditional Arabic", "Segoe UI", serif;
+  font-size: 30px;
+  direction: rtl;
+  color: var(--ab-gold-light);
+  margin: 6px 0 12px;
+}
+.hero .subtitle { font-size: 16px; opacity: .9; max-width: 680px; margin: 0 auto; }
+.hero-tags { margin-top: 18px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-tags span {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: 4px 12px; border-radius: 999px; font-size: 13px;
+}
+
+/* ---------- 内容容器 ---------- */
+.page-section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 26px 24px 8px;
+}
+.page-section h2 {
+  font-size: 22px;
+  margin: 8px 0 16px;
+  padding-bottom: 8px;
+  color: var(--ab-green);
+  border-bottom: 3px solid var(--ab-gold);
+  display: inline-block;
+}
+.page-section h3 {
+  font-size: 18px;
+  margin: 22px 0 10px;
+  color: var(--ab-green-light);
+}
+.page-section p { margin: 8px 0; color: var(--ab-ink-soft); }
+
+/* ---------- 阿拉伯语发音标记 ---------- */
+.ar {
+  direction: rtl;
+  unicode-bidi: embed;
+  cursor: pointer;
+  color: var(--ab-ink);
+  font-family: "Geeza Pro", "Scheherazade New", "Traditional Arabic", "Segoe UI", "Microsoft Uighur", serif;
+  font-size: 1.12em;
+  border-bottom: 1px dotted var(--ab-gold);
+  transition: color .15s, background .15s;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+.ar:hover { color: var(--ab-green); background: var(--ab-green-pale); }
+.ar::after {
+  content: "🔊";
+  font-size: .62em;
+  vertical-align: super;
+  margin-inline-start: 3px;
+  opacity: .55;
+}
+.ar:hover::after { opacity: 1; }
+.ar-cell { direction: rtl; text-align: right; }
+
+/* ---------- 表格 ---------- */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 8px;
+  background: #fff;
+  border-radius: var(--ab-radius);
+  overflow: hidden;
+  box-shadow: var(--ab-shadow);
+  font-size: 15px;
+}
+.content-table thead th {
+  background: linear-gradient(135deg, var(--ab-green), var(--ab-green-light));
+  color: #fff;
+  padding: 11px 14px;
+  text-align: center;
+  font-weight: 600;
+}
+.content-table tbody td {
+  padding: 10px 14px;
+  border-top: 1px solid #ececec;
+  vertical-align: top;
+}
+.content-table tbody tr:nth-child(even) { background: var(--ab-cream); }
+.content-table tbody tr:hover { background: var(--ab-green-pale); }
+.content-table .zh { color: var(--ab-ink-soft); }
+
+/* ---------- 语法框 / 文化框 ---------- */
+.grammar-box {
+  border-right: 5px solid var(--ab-gold);
+  background: linear-gradient(90deg, var(--ab-cream-2), #fff);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 16px 0 8px;
+  box-shadow: var(--ab-shadow);
+}
+.cultura-box {
+  border-top: 4px solid var(--ab-gold);
+  background: var(--ab-cream-2);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 16px 0 8px;
+}
+.note-box {
+  background: var(--ab-green-pale);
+  border: 1px dashed var(--ab-green-light);
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin: 14px 0 6px;
+  color: var(--ab-ink-soft);
+  font-size: 14.5px;
+}
+.note-box.info { background: #EAF2FB; border-color: #9CC2E6; }
+
+/* ---------- 词汇总表标题 ---------- */
+.vocab-heading { margin-top: 0; }
+
+/* ---------- 底部导航按钮 ---------- */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 980px;
+  margin: 30px auto;
+  padding: 0 24px;
+  flex-wrap: wrap;
+}
+.nav-buttons a {
+  flex: 1;
+  text-align: center;
+  background: linear-gradient(135deg, var(--ab-green), var(--ab-green-light));
+  color: #fff;
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: var(--ab-shadow);
+  transition: transform .15s, box-shadow .15s;
+  min-width: 140px;
+}
+.nav-buttons a:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(21,96,58,.22); color:#fff; }
+.nav-buttons a.disabled {
+  background: #cfd8d2; box-shadow: none; cursor: default; pointer-events: none;
+}
+
+/* ---------- 首页卡片 ---------- */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+.stat-card {
+  background: #fff;
+  border-radius: var(--ab-radius);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--ab-shadow);
+  border-top: 4px solid var(--ab-gold);
+}
+.stat-card .num { font-size: 30px; font-weight: 800; color: var(--ab-green); }
+.stat-card .label { font-size: 14px; color: var(--ab-ink-soft); margin-top: 4px; }
+
+.unit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  max-width: 1040px;
+  margin: 24px auto;
+  padding: 0 24px;
+}
+.unit-card {
+  background: #fff;
+  border-radius: var(--ab-radius);
+  padding: 22px;
+  box-shadow: var(--ab-shadow);
+  border: 1px solid rgba(21,96,58,.08);
+  transition: transform .18s, box-shadow .18s;
+  display: block;
+  color: var(--ab-ink);
+}
+.unit-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(21,96,58,.18); }
+.unit-card .uc-num {
+  display: inline-block;
+  background: var(--ab-green);
+  color: #fff;
+  font-size: 13px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.unit-card .uc-title { font-size: 18px; font-weight: 700; color: var(--ab-green); }
+.unit-card .uc-ar {
+  font-family: "Geeza Pro", "Scheherazade New", "Traditional Arabic", serif;
+  direction: rtl;
+  color: var(--ab-gold);
+  font-size: 18px;
+  margin: 4px 0 8px;
+}
+.unit-card .uc-desc { font-size: 14px; color: var(--ab-ink-soft); }
+.unit-card .uc-meta { margin-top: 12px; font-size: 12.5px; color: #8a968d; }
+
+/* ---------- 练习册交互 ---------- */
+.exercise {
+  background: #fff;
+  border-radius: var(--ab-radius);
+  padding: 18px 22px;
+  margin: 16px 0;
+  box-shadow: var(--ab-shadow);
+  border-right: 5px solid var(--ab-gold);
+}
+.exercise .q { font-weight: 600; margin-bottom: 6px; }
+.exercise .hint { font-size: 13px; color: #8a968d; margin-bottom: 10px; }
+.exercise .show-btn {
+  background: var(--ab-green);
+  color: #fff; border: none; border-radius: 8px;
+  padding: 7px 16px; cursor: pointer; font-size: 14px;
+}
+.exercise .answer {
+  display: none;
+  margin-top: 12px; padding: 12px 16px;
+  background: var(--ab-green-pale); border-radius: 8px;
+  color: var(--ab-ink);
+}
+.exercise .answer.open { display: block; }
+
+/* ---------- 页脚 ---------- */
+.site-footer {
+  background: #0E4630;
+  color: #cfe3d6;
+  text-align: center;
+  padding: 28px 20px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+.site-footer .ar-foot {
+  font-family: "Geeza Pro", "Scheherazade New", serif;
+  direction: rtl; font-size: 18px; color: var(--ab-gold-light);
+  margin-bottom: 6px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: #fff; padding: 10px; box-shadow: var(--ab-shadow); }
+  .nav-toggle { display: block; }
+  .top-nav { position: relative; }
+  .hero h1 { font-size: 26px; }
+  .content-table { font-size: 13.5px; }
+  .content-table thead th, .content-table tbody td { padding: 8px 9px; }
+}
