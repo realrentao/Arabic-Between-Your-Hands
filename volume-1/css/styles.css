@@ -195,14 +195,6 @@ a:hover { color: var(--ab-green-light); }
   padding: 0 2px;
 }
 .ar:hover { color: var(--ab-green); background: var(--ab-green-pale); }
-.ar::after {
-  content: "🔊";
-  font-size: .62em;
-  vertical-align: super;
-  margin-inline-start: 3px;
-  opacity: .55;
-}
-.ar:hover::after { opacity: 1; }
 .ar-cell { direction: rtl; text-align: right; }
 
 /* ---------- 表格 ---------- */
