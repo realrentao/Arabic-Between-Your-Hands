@@ -103,11 +103,16 @@
 
   // 事件委托：点击任意 .ar 元素发音
   // data-audio 可选：当同一阿拉伯语文本需不同音色/音频时，用它作为映射键（显示文本仍取 data-ar）
+  // data-voice 可选：指定音色（f=女声默认 / m=男声 / mh,me,z…=不同人物音色）；查询键自动追加 #voice 后缀
   document.addEventListener("click", function (e) {
     var el = e.target.closest ? e.target.closest(".ar") : null;
     if (el) {
       var t = el.getAttribute("data-ar") || el.textContent;
       var key = el.getAttribute("data-audio") || t;
+      var voice = el.getAttribute("data-voice");
+      if (voice && voice !== "f" && !el.getAttribute("data-audio")) {
+        key = t + "#" + voice;
+      }
       speak(key, t);
     }
   });
