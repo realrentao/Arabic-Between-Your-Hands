@@ -88,24 +88,27 @@
     }
   }
 
-  function speak(text, lang) {
-    text = normalizeAr(text);
-    if (!text) return;
-    window.__lastArText = text;
-    var url = AR_AUDIO[text];
+  function speak(key, displayText) {
+    key = normalizeAr(key);
+    if (!key) return;
+    var disp = normalizeAr(displayText || key);
+    window.__lastArText = disp;
+    var url = AR_AUDIO[key];
     if (url) {
       playAudio(url); // 真人音频
     } else {
-      synthFallback(text, lang); // 无音频文件时浏览器合成兜底
+      synthFallback(disp); // 无音频文件时浏览器合成兜底
     }
   }
 
   // 事件委托：点击任意 .ar 元素发音
+  // data-audio 可选：当同一阿拉伯语文本需不同音色/音频时，用它作为映射键（显示文本仍取 data-ar）
   document.addEventListener("click", function (e) {
     var el = e.target.closest ? e.target.closest(".ar") : null;
     if (el) {
       var t = el.getAttribute("data-ar") || el.textContent;
-      speak(t);
+      var key = el.getAttribute("data-audio") || t;
+      speak(key, t);
     }
   });
 
