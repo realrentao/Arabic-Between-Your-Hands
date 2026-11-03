@@ -55,7 +55,7 @@
     return (text || "").replace(/\s+/g, " ").trim();
   }
 
-  function playAudio(url) {
+  function playAudio(url, displayText, noBrowser) {
     try {
       var a = audioCache[url];
       if (!a) {
@@ -66,12 +66,14 @@
       var pr = a.play();
       if (pr && pr.catch) {
         pr.catch(function (e) {
-          console.warn("音频播放失败，转浏览器合成:", e);
-          synthFallback(normalizeAr(window.__lastArText || ""));
+          console.warn("音频播放失败:", e);
+          // noBrowser：真人音频为唯一来源，失败时不再降级到浏览器合成
+          if (!noBrowser) synthFallback(normalizeAr(displayText || ""));
         });
       }
     } catch (e) {
       console.warn("Audio 创建失败:", e);
+      if (!noBrowser) synthFallback(normalizeAr(displayText || ""));
     }
   }
 
@@ -88,14 +90,15 @@
     }
   }
 
-  function speak(key, displayText) {
+  function speak(key, displayText, noBrowser) {
     key = normalizeAr(key);
     if (!key) return;
     var disp = normalizeAr(displayText || key);
-    window.__lastArText = disp;
     var url = AR_AUDIO[key];
     if (url) {
-      playAudio(url); // 真人音频
+      playAudio(url, disp, noBrowser); // 真人音频
+    } else if (noBrowser) {
+      return; // 对话二：仅用真人音频，取消浏览器合成兜底
     } else {
       synthFallback(disp); // 无音频文件时浏览器合成兜底
     }
@@ -113,7 +116,8 @@
       if (voice && voice !== "f" && !el.getAttribute("data-audio")) {
         key = t + "#" + voice;
       }
-      speak(key, t);
+      var noBrowser = el.hasAttribute("data-nobrowser");
+      speak(key, t, noBrowser);
     }
   });
 
